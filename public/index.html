@@ -9,8 +9,25 @@
 </head>
 
 <body oncontextmenu="return false;">
-    <div id="test">
-        <span>Hi!</span>
+    <div class="page dropdown enabled" id="login">
+        <h1>OpnLaaS - Login</h1>
+
+        <div class="form-contents">
+
+            <label for="username">Username</label>
+            <input type="text" id="username" /> <br />
+
+            <label for="password">Password</label>
+            <input type="password" id="password" /> <br />
+
+            <select id="realm">
+                <option value="__placeholder__">Select Realm</option>
+                <option value="unhcsc">UNHCSC</option>
+                <option value="ceps">CEPS</option>
+            </select> <br />
+
+            <button id="login-button">Login</button>
+        </div>
     </div>
 </body>
 

@@ -1,19 +1,141 @@
 * {
     font-family: sans-serif;
+    transition: all 256ms ease-in-out;
 }
 
-html, body {
+:root {
+    --background: #EEEEEE;
+    --dropdown-background: #AAAAAA;
+    --text: #555555;
+    --error: #FF5555;
+    --success: #55FF55;
+}
+
+:root.dark {
+    --background: #333333;
+    --dropdown-background: #555555;
+    --text: #EEEEEE;
+}
+
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
 
-#test {
+body {
+    background: var(--background);
+    color: var(--text);
+}
+
+.page.dropdown {
     position: absolute;
-    top: 50%;
+    top: -200%;
     left: 50%;
     transform: translate(-50%, -50%);
+    padding: 1vmin;
+    background: var(--dropdown-background);
+    border-radius: .5vmin;
     text-align: center;
-    font-size: 10vmin;
+}
+
+.page.dropdown.enabled {
+    top: 50%;
+}
+
+.form-contents {
+    align-items: center;
+    font-size: 2vmin;
+}
+
+.form-contents>*+* {
+    margin-top: 1vmin;
+}
+
+.form-contents>*:last-child {
+    margin-top: 2vmin;
+}
+
+.form-contents>input {
+    -webkit-appearance: none;
+    appearance: none;
+    border: .25vmin solid var(--background);
+    outline: none;
+    padding: .5vmin;
+    background: var(--background);
+    border-radius: .5vmin;
+    box-sizing: border-box;
+    font-size: 2vmin;
+    color: var(--text);
+}
+
+.form-contents>.shake {
+    border: .25vmin solid var(--error);
+}
+
+.form-contents>.good {
+    border: .25vmin solid var(--success);
+}
+
+.form-contents>button {
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    outline: none;
+    padding: .5vmin 1vmin;
+    background: var(--background);
+    border-radius: .5vmin;
+    box-sizing: border-box;
+    font-size: 2vmin;
+    color: var(--text);
+    padding: 1vmin 8vmin;
+}
+
+.form-contents>button:active {
+    background: var(--dropdown-background);
+}
+
+.form-contents>button:hover {
+    cursor: pointer;
+}
+
+.form-contents>select {
+    -webkit-appearance: none;
+    appearance: none;
+    border: .25vmin solid var(--background);
+    outline: none;
+    padding: .5vmin;
+    background: var(--background) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23555555' d='M8.59 16.34L12 12.91l3.41 3.43L17 15l-5-5-5 5z'/%3E%3C/svg%3E") no-repeat right .5vmin center;
+    background-size: 2vmin;
+    border-radius: .5vmin;
+    box-sizing: border-box;
+    font-size: 2vmin;
+    color: var(--text);
+    width: 100%;
+}
+
+/* Shake Animation */
+
+.shake {
+    animation: shake 256ms ease-in-out;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(0);
+    }
+
+    33% {
+        transform: translate(-.5vmin);
+    }
+
+    66% {
+        transform: translate(.5vmin);
+    }
+
+    100% {
+        transform: translate(0);
+    }
 }
