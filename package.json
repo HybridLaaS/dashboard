@@ -2,7 +2,7 @@
     "name": "dashboard",
     "version": "1.0.0",
     "type": "module",
-    "description": "The Dashboard project for OpenLaaS",
+    "description": "The Dashboard project for OpnLaaS",
     "license": "GPL-3.0-only",
     "private": true,
     "scripts": {
