@@ -6,9 +6,15 @@ if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").match
     document.documentElement.classList.add("dark");
 }
 
+await config.loadRealms();
+
 const realmsList = document.querySelectorAll("#realm");
 realmsList.forEach(realmSelector => {
     config.realms.forEach(realm => {
+        if (!realm.ok) {
+            return;
+        }
+
         const option = document.createElement("option");
         option.value = realm.name;
         option.innerText = realm.name;
