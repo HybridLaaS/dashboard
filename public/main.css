@@ -30,6 +30,14 @@ body {
     color: var(--text);
 }
 
+.page {
+    display: none;
+}
+
+.page.enabled {
+    display: block;
+}
+
 .page.dropdown {
     position: absolute;
     top: -200%;
@@ -46,19 +54,39 @@ body {
 }
 
 .form-contents {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     font-size: 2vmin;
+    width: 100%;
+}
+
+.form-contents div {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Adjust width for better alignment */
+    text-align: left;
+}
+
+.form-contents input, .form-contents select, .form-contents button {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-contents label {
+    font-size: 1.8vmin;
+    margin-bottom: 0.5vmin;
 }
 
 .form-contents>*+* {
     margin-top: 1vmin;
 }
 
-.form-contents>*:last-child {
-    margin-top: 2vmin;
+.form-contents>*:nth-last-child(2) {
+    margin-top: 4vmin;
 }
 
-.form-contents>input {
+.form-contents input {
     -webkit-appearance: none;
     appearance: none;
     border: .25vmin solid var(--background);
@@ -71,15 +99,15 @@ body {
     color: var(--text);
 }
 
-.form-contents>.shake {
+.form-contents .shake {
     border: .25vmin solid var(--error);
 }
 
-.form-contents>.good {
+.form-contents .good {
     border: .25vmin solid var(--success);
 }
 
-.form-contents>button {
+.form-contents button {
     -webkit-appearance: none;
     appearance: none;
     border: none;
@@ -93,15 +121,15 @@ body {
     padding: 1vmin 8vmin;
 }
 
-.form-contents>button:active {
+.form-contents button:active {
     background: var(--dropdown-background);
 }
 
-.form-contents>button:hover {
+.form-contents button:hover {
     cursor: pointer;
 }
 
-.form-contents>select {
+.form-contents select {
     -webkit-appearance: none;
     appearance: none;
     border: .25vmin solid var(--background);
@@ -114,6 +142,11 @@ body {
     font-size: 2vmin;
     color: var(--text);
     width: 100%;
+}
+
+.clickable-text {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 /* Shake Animation */
