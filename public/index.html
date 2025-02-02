@@ -10,24 +10,64 @@
 
 <body oncontextmenu="return false;">
     <div class="page dropdown enabled" id="login">
-        <h1>OpnLaaS - Login</h1>
+        <h1>OpnLaaS - Login to a Realm</h1>
 
         <div class="form-contents">
-
-            <label for="username">Username</label>
-            <input type="text" id="username" /> <br />
-
-            <label for="password">Password</label>
-            <input type="password" id="password" /> <br />
-
-            <select id="realm">
-                <option value="__placeholder__">Select Realm</option>
-                <option value="unhcsc">UNHCSC</option>
-                <option value="ceps">CEPS</option>
-            </select> <br />
-
+            <div>
+                <label for="email">E-Mail Address</label>
+                <input type="email" id="email" />
+            </div>
+        
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" />
+            </div>
+        
+            <div>
+                <label for="realm">Select Realm</label>
+                <select id="realm">
+                    <option value="__placeholder__">Select Realm</option>
+                </select>
+            </div>
+        
             <button id="login-button">Login</button>
-        </div>
+        
+            <span class="clickable-text" id="switch-to-register">Register to a realm instead</span>
+        </div>        
+    </div>
+    <div class="page dropdown" id="register">
+        <h1>OpnLaaS - Register to a Realm</h1>
+
+        <div class="form-contents">
+            <div>
+                <label for="email">E-Mail Address</label>
+                <input type="email" id="email" />
+            </div>
+        
+            <div>
+                <label for="password">Password</label>
+                <input type="password" id="password" />
+            </div>
+            
+            <div>
+                <label for="password-confirm">Password (Confirm)</label>
+                <input type="password" id="password-confirm" />
+            </div>
+        
+            <div>
+                <label for="realm">Select Realm</label>
+                <select id="realm">
+                    <option value="__placeholder__">Select Realm</option>
+                </select>
+            </div>
+        
+            <button id="register">Register</button>
+        
+            <span class="clickable-text" id="switch-to-login">Login to a realm instead</span>
+        </div>        
+    </div>
+    <div class="page" id="home">
+        <h1>OpnLaaS - Home</h1>
     </div>
 </body>
 
