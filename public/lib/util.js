@@ -1,6 +1,6 @@
 /** @param {string} email */
 export function validEmail(email) {
-    return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email);
+    return /^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$/g.test(email);
 }
 
 /** @param {string} password */
