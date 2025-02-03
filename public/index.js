@@ -1,5 +1,6 @@
 import * as util from "./lib/util.js";
 import * as config from "./lib/config.js";
+import * as api from "./api/api.js";
 
 // Apply Theme
 if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
@@ -22,6 +23,7 @@ realmsList.forEach(realmSelector => {
     });
 });
 
+/** @returns {boolean | { email: string, password: string, realm: string }} */
 function validateLoginForm() {
     const form = document.querySelector("#login .form-contents");
     const email = form.querySelector("input#email");
@@ -48,7 +50,71 @@ function validateLoginForm() {
     }
 
     util.success(dropdown);
-    return true;
+    return {
+        email: email.value,
+        password: password.value,
+        realm: dropdown.value
+    };
+}
+
+/** @returns {boolean | { email: string, firstName: string, lastName: string, password: string, realm: string }} */
+function validateRegisterForm() {
+    const form = document.querySelector("#register .form-contents");
+    const email = form.querySelector("input#email");
+    const firstName = form.querySelector("input#first-name");
+    const lastName = form.querySelector("input#last-name");
+    const password = form.querySelector("input#password");
+    const confirmPassword = form.querySelector("input#password-confirm");
+    const dropdown = form.querySelector("select#realm");
+
+    if (!util.validEmail(email.value)) {
+        util.shake(email);
+        return false;
+    }
+
+    util.success(email);
+
+    if (!util.validName(firstName.value)) {
+        util.shake(firstName);
+        return false;
+    }
+
+    util.success(firstName);
+
+    if (!util.validName(lastName.value)) {
+        util.shake(lastName);
+        return false;
+    }
+
+    util.success(lastName);
+
+    if (!util.validPassword(password.value)) {
+        util.shake(password);
+        return false;
+    }
+
+    util.success(password);
+
+    if (password.value !== confirmPassword.value) {
+        util.shake(confirmPassword);
+        return false;
+    }
+
+    util.success(confirmPassword);
+
+    if (!util.validDropdown(dropdown)) {
+        util.shake(dropdown);
+        return false;
+    }
+
+    util.success(dropdown);
+    return {
+        email: email.value,
+        firstName: firstName.value,
+        lastName: lastName.value,
+        password: password.value,
+        realm: dropdown.value
+    };
 }
 
 function switchPage(pageID) {
@@ -62,7 +128,46 @@ function switchPage(pageID) {
     nextPage.classList.add("enabled");
 }
 
-document.querySelector("button#login-button").onclick = validateLoginForm;
+document.querySelector("button#login-button").onclick = async function login() {
+    const form = validateLoginForm();
+
+    if (form === false) {
+        return;
+    }
+
+    config.setCurrentRealm(form.realm);
+
+    const response = await api.login(form.email, form.password);
+
+    if (!response.ok) {
+        alert(response.getStatusName());
+        return;
+    }
+
+    alert("Logged in successfully");
+}
+
+document.querySelector("button#register-button").onclick = async function register() {
+    const form = validateRegisterForm();
+
+    if (form === false) {
+        return;
+    }
+
+    config.setCurrentRealm(form.realm);
+
+    const response = await api.createAccount(form.email, form.firstName, form.lastName, form.password, form.realm);
+
+    if (!response.ok) {
+        alert(response.getStatusName());
+        return;
+    }
+
+    alert("Account created successfully");
+}
 
 document.getElementById("switch-to-register").onclick = () => switchPage("register");
 document.getElementById("switch-to-login").onclick = () => switchPage("login");
+
+window.api = api;
+window.selectRealm = realm => config.setCurrentRealm(realm);

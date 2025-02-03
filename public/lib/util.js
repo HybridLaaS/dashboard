@@ -1,11 +1,15 @@
 /** @param {string} email */
 export function validEmail(email) {
-    return /^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$/g.test(email);
+    return /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-z]{2,4}$/g.test(email);
 }
 
 /** @param {string} password */
 export function validPassword(password) {
     return password.length >= 8 && password.length <= 64;
+}
+
+export function validName(name) {
+    return name.length > 0 && name.length <= 64 && /^[a-zA-Z-' ]+$/g.test(name);
 }
 
 /** @param {HTMLSelectElement} dropdown */

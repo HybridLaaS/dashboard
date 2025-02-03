@@ -1,5 +1,6 @@
 import fs from "fs";
 import http from "http";
+import path from "path";
 
 const publicDir = process.argv[2] || "./public";
 
@@ -19,7 +20,14 @@ function getMimeType(filePath) {
 }
 
 function httpHandler(request, response) {
-    const filePath = publicDir + (request.url === "/" ? "/index.html" : request.url);
+    const filePath = path.resolve(publicDir, (request.url === "/" ? "/index.html" : request.url));
+
+    if (!filePath.startsWith(publicDir)) {
+        response.writeHead(403);
+        response.end();
+        return;
+    }
+
     fs.readFile(filePath, (err, data) => {
         if (err) {
             response.writeHead(404);

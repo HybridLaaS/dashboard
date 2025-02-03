@@ -44,3 +44,15 @@ export const realms = [new Realm("localhost:8090", false)];
 export async function loadRealms() {
     await Promise.all(realms.map(realm => realm.load()));
 }
+
+/** @type {Realm|null} */
+export let currentRealm = null;
+
+/** @param {Realm|string} realm */
+export function setCurrentRealm(realm) {
+    if (typeof realm === "string") {
+        realm = realms.find(r => r.name === realm) || null;
+    }
+
+    currentRealm = realm;
+}

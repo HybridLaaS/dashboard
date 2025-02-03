@@ -55,7 +55,6 @@ const config = {
                             const content = fs.readFileSync(sourcePath, "utf8")
                                 .replace(/(\r\n|\n|\r|\t)/gm, "")
                                 .replace("index.js", "bundle.js")
-                                .replace(/<!--.*?-->/g, "")
                                 .replace(/\s+/g, " ");
 
                             fs.writeFileSync(destPath, content, "utf8");
