@@ -163,7 +163,7 @@ document.querySelector("button#register-button").onclick = async function regist
         return;
     }
 
-    alert("Account created successfully");
+    switchPage("verify-email");
 }
 
 document.getElementById("switch-to-register").onclick = () => switchPage("register");

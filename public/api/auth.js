@@ -14,6 +14,18 @@ export async function createAccount(email, firstName, lastName, password) {
     return new APIResponse(response.status, response.status === 200 ? await response.json() : null);
 }
 
+export async function verifyAccount(email, token) {
+    const response = await fetch(getAPIHost() + "/user/verify", {
+        ...POST_FIELDS,
+        body: JSON.stringify({
+            email: email.toString().toLowerCase(),
+            token: token
+        })
+    });
+
+    return new APIResponse(response.status, response.status === 200 ? await response.json() : null);
+}
+
 export async function login(email, password) {
     const response = await fetch(getAPIHost() + "/user/login", {
         ...POST_FIELDS,
