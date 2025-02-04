@@ -11,7 +11,7 @@ export async function createAccount(email, firstName, lastName, password) {
         })
     });
 
-    return new APIResponse(response.status, response.status === 200 ? await response.json() : null);
+    return new APIResponse(response.status, null);
 }
 
 export async function verifyAccount(email, token) {

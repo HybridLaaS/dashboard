@@ -145,6 +145,7 @@ document.querySelector("button#login-button").onclick = async function login() {
     }
 
     alert("Logged in successfully");
+    switchPage("home");
 }
 
 document.querySelector("button#register-button").onclick = async function register() {
@@ -164,6 +165,27 @@ document.querySelector("button#register-button").onclick = async function regist
     }
 
     switchPage("verify-email");
+
+    document.querySelector("button#verify-email-button").onclick = async function verifyEmail() {
+        const token = document.querySelector("input#email-token");
+
+        if (!token.value) {
+            util.shake(token);
+            return;
+        }
+
+        util.success(token);
+
+        const response = await api.verifyAccount(form.email, token.value);
+
+        if (!response.ok) {
+            alert(response.getStatusName());
+            return;
+        }
+
+        alert("Account verified successfully");
+        switchPage("home");
+    }
 }
 
 document.getElementById("switch-to-register").onclick = () => switchPage("register");

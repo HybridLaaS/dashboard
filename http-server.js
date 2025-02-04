@@ -2,7 +2,7 @@ import fs from "fs";
 import http from "http";
 import path from "path";
 
-const publicDir = process.argv[2] || "./public";
+const publicDir = path.resolve(process.argv[2] || "./public");
 
 function getMimeType(filePath) {
     const extension = filePath.split(".").pop();
@@ -20,7 +20,7 @@ function getMimeType(filePath) {
 }
 
 function httpHandler(request, response) {
-    const filePath = path.resolve(publicDir, (request.url === "/" ? "/index.html" : request.url));
+    const filePath = path.resolve(publicDir + (request.url === "/" ? "/index.html" : request.url));
 
     if (!filePath.startsWith(publicDir)) {
         response.writeHead(403);
